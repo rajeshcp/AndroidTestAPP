@@ -1,10 +1,12 @@
 package com.triode.androidtestapp.core.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.triode.androidtestapp.core.fragments.AtomicFragment;
 import com.triode.androidtestapp.core.fragmentstack.FragmentManager;
 
 /**
@@ -28,6 +30,35 @@ public class AtomicActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Take care of popping the fragment back stack or finishing the activity
+     * as appropriate.
+     */
+    @Override
+    public void onBackPressed() {
+        final int count = getSupportFragmentManager().getBackStackEntryCount();
+        if(count > 0) {
+            final AtomicFragment fragment = mFragmentManager.getFragmentAt(count - 1);
+            if (fragment != null && !fragment.onBackpressed()) {
+                if (!mFragmentManager.pop()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        finishAfterTransition();
+                    } else super.onBackPressed();
+                }
+                if(count == 1){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        finishAfterTransition();
+                    } else super.onBackPressed();
+                }
+            }
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else super.onBackPressed();
+        }
     }
 
     /**

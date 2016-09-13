@@ -9,7 +9,7 @@ import com.triode.androidtestapp.core.activities.AtomicActivity;
 /**
  * Created by triode on 8/9/16.
  */
-public class AtomicFragment extends Fragment {
+public abstract class AtomicFragment extends Fragment {
 
     /**
      * function returns the activity associated with the Fragment
@@ -19,5 +19,13 @@ public class AtomicFragment extends Fragment {
     protected AppCompatActivity getAtomicActivity(){
         return ((AtomicActivity)getActivity());
     }
+
+    /**
+     * this allow the fragment to listen for the device back
+     * press
+     *
+     * @return true if handled else false
+     */
+    public abstract boolean onBackpressed();
 
 }
