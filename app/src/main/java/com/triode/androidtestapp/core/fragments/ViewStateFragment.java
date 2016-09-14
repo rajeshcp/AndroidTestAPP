@@ -145,7 +145,7 @@ public abstract class ViewStateFragment<V extends ViewStateView, P extends IPres
      */
     private void saveState(){
         VS viewState = saveViewState();
-        if(viewState != null){
+        if(viewState != null && getArguments() != null){
             getArguments().putParcelable(VIEW_STATE, viewState);
         }
     }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AndroidTestAPP</string>
     <string name="action_settings">Settings</string>
+
+    <string name="db_name">com.triode</string>
+    <string name="share">Share</string>
+    <string name="favorite">Favorite</string>
+    <integer name="db_version">1</integer>
+
 </resources>

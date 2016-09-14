@@ -64,14 +64,6 @@ public abstract class MVActivity<V extends IView> extends AtomicActivity {
         onBindView();
     }
 
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mView.onDestroy();
-        mView = null;
-    }
-
     /**
      * Called when the main window associated with the activity has been
      * attached to the window manager.
@@ -87,6 +79,7 @@ public abstract class MVActivity<V extends IView> extends AtomicActivity {
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        mView.onDestroy();
         mView = null;
     }
 

@@ -16,7 +16,7 @@ public abstract class AtomicFragment extends Fragment {
      *
      * @return AppCompatActivity instance
      */
-    protected AppCompatActivity getAtomicActivity(){
+    protected AtomicActivity getAtomicActivity(){
         return ((AtomicActivity)getActivity());
     }
 

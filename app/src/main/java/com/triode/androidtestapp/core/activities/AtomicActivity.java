@@ -16,8 +16,10 @@ public class AtomicActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
 
+    protected boolean isRestored;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        isRestored = (savedInstanceState != null);
         super.onCreate(savedInstanceState);
         mFragmentManager = new FragmentManager(getSupportFragmentManager());
     }
@@ -66,7 +68,7 @@ public class AtomicActivity extends AppCompatActivity {
      *
      * @return FragmentManager instance associated with the AtomicActivity
      */
-    protected final FragmentManager getmFragmentManager(){
+    public final FragmentManager getmFragmentManager(){
         return mFragmentManager;
     }
 

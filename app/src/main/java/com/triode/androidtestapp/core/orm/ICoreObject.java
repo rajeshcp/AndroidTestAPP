@@ -13,12 +13,6 @@ public interface ICoreObject<T> {
      */
     void saveAll(final List<T> objects) throws Exception;
 
-    /**
-     * function which will remove the records from the DB
-     *
-     * @param objects the list of items to be removed
-     */
-    void deleteAll(final List<T> objects);
 
     /**
      * function delete all the records in the table

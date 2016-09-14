@@ -4,6 +4,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.triode.androidtestapp.R;
 import com.triode.androidtestapp.core.activities.MVActivity;
+import com.triode.androidtestapp.core.fragmentstack.FragmentTransaction;
+import com.triode.androidtestapp.product.splash.SplashFragment;
 
 /**
  * Created by triode on 13/9/16.
@@ -28,7 +30,24 @@ public class HomeActivity extends MVActivity<HomeView> {
     @Override
     protected void onBindView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_reorder_black_24dp);
+        //toolbar.setLogo(R.drawable.ic_reorder_black_24dp);
         setSupportActionBar(toolbar);
+        if(!isRestored){
+            getSupportActionBar().hide();
+            showSpalshScreen();
+        }
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * function show the splash screen
+     */
+    private void showSpalshScreen(){
+        final FragmentTransaction transaction = new FragmentTransaction();
+        transaction.isRoot = true;
+        transaction.mFrameId = R.id.container_view;
+        transaction.mFragmentClass = SplashFragment.class;
+        getmFragmentManager().push(transaction);
     }
 }
