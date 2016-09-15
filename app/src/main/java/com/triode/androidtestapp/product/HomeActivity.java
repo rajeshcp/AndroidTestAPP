@@ -32,12 +32,11 @@ public class HomeActivity extends MVActivity<HomeView> {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setLogo(R.drawable.ic_reorder_black_24dp);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if(!isRestored){
             getSupportActionBar().hide();
             showSpalshScreen();
         }
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**
@@ -46,6 +45,8 @@ public class HomeActivity extends MVActivity<HomeView> {
     private void showSpalshScreen(){
         final FragmentTransaction transaction = new FragmentTransaction();
         transaction.isRoot = true;
+        transaction.mInAnimation = android.support.design.R.anim.abc_grow_fade_in_from_bottom;
+        transaction.mOutAnimation = android.support.design.R.anim.abc_slide_out_top;
         transaction.mFrameId = R.id.container_view;
         transaction.mFragmentClass = SplashFragment.class;
         getmFragmentManager().push(transaction);

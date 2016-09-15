@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by triode on 12/9/16.
  */
-public class API {
+public class ProductLoader {
 
     public static final String PRODUCT_END_POINT = "https://gist.githubusercontent.com/maclir/f715d78b49c3b4b3b77f/raw/8854ab2fe4cbe2a5919cea97d71b714ae5a4838d/items.json";
 

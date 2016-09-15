@@ -1,6 +1,5 @@
 package com.triode.androidtestapp.product.list;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.triode.androidtestapp.R;
@@ -74,7 +73,7 @@ public class ProductListFragment extends FragmentViewStateFragment<ViewState, Pr
 
     void setAdapter(){
         mAdapter.setmDataprovider(fragmentState.getProductList());
-        mView.mView.setAdapter(mAdapter);
+        mView.recyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -130,7 +129,7 @@ public class ProductListFragment extends FragmentViewStateFragment<ViewState, Pr
         eventHelper.removeViewEvents(this);
     }
 
-    static final int ITEMS_PER_PAGE = 100;
+    static final int ITEMS_PER_PAGE = 50;
     private void handleProductLoad(final List<ProductViewCompatVO> list){
         if(list == null || list.isEmpty()){
             fragmentState.setPageLoadComplete(true);
@@ -149,11 +148,16 @@ public class ProductListFragment extends FragmentViewStateFragment<ViewState, Pr
     @Override
     public void onEvent(Event event) {
         if(event.getType().equals(ProductPresenter.PRODUCTS_FETCHED_EVENT)){
+            mView.hideProgress();
             final List<ProductViewCompatVO> list = ((CoreEvent)event).getmExtra().
                     getParcelableArrayList(Constants.DATA);
             handleProductLoad(list);
         }else if(event.getType().equals(ProductsAdapter.LAST_ITEM_REACHED)){
-            mPresenter.loadProducts(fragmentState.getProductList().size(), ITEMS_PER_PAGE);
+            if(!fragmentState.isPageLoadComplete()) {
+                mPresenter.loadProducts(fragmentState.getProductList().size(),
+                        ITEMS_PER_PAGE);
+                mView.showProgress();
+            }
         }else if(event.getType().equals(ProductsAdapter.FAVORITE_EVENT)){
             handleFavoriteClick(((CoreEvent)event).getmExtra().getInt(Constants.DATA));
         }else if(event.getType().equals(ProductsAdapter.SHARE_EVENT)){
@@ -175,6 +179,8 @@ public class ProductListFragment extends FragmentViewStateFragment<ViewState, Pr
         final FragmentTransaction transaction = new FragmentTransaction();
         transaction.mFrameId = R.id.container_view;
         transaction.mParameters = data;
+        transaction.mInAnimation = android.support.design.R.anim.abc_slide_in_bottom;
+        transaction.mOutAnimation = android.support.design.R.anim.abc_fade_out;
         transaction.mFragmentClass = ProductDetailsFragment.class;
         getAtomicActivity().getmFragmentManager().push(transaction);
     }

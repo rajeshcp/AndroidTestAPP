@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
 import com.triode.androidtestapp.AppModule;
-import com.triode.androidtestapp.api.API;
+import com.triode.androidtestapp.api.ProductLoader;
 import com.triode.androidtestapp.api.ProductViewCompatVO;
 import com.triode.androidtestapp.core.Constants;
 import com.triode.androidtestapp.core.events.CoreEvent;
@@ -38,7 +38,7 @@ public class ProductPresenter<V extends ProductListView> extends BasePresenter<V
     void loadProducts(final int skip, final int limit){
         if(observable != null)
             return;
-        observable = API.getProductFromDB(skip, limit);
+        observable = ProductLoader.getProductFromDB(skip, limit);
         subscription = observable.subscribe(new Subscriber<List<ProductViewCompatVO>>() {
             @Override
             public void onCompleted() {

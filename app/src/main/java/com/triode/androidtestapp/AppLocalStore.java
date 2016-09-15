@@ -2,9 +2,8 @@ package com.triode.androidtestapp;
 
 import android.support.annotation.StringDef;
 
-import com.triode.androidtestapp.api.API;
+import com.triode.androidtestapp.api.ProductLoader;
 import com.triode.androidtestapp.core.APPNucleus;
-import com.triode.androidtestapp.core.Constants;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -101,7 +100,7 @@ public class AppLocalStore {
     /**
      * @RequestType
      */
-    @StringDef({API.PRODUCT_END_POINT})
+    @StringDef({ProductLoader.PRODUCT_END_POINT})
     @Retention(RetentionPolicy.SOURCE)
     @interface PreferencesKeys {
     }

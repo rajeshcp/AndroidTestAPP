@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 
 import com.triode.androidtestapp.AppModule;
-import com.triode.androidtestapp.api.API;
+import com.triode.androidtestapp.api.ProductLoader;
 import com.triode.androidtestapp.core.Constants;
 import com.triode.androidtestapp.core.events.CoreEvent;
 import com.triode.androidtestapp.core.mvp.BasePresenter;
@@ -33,7 +33,7 @@ public class SplashPresenter<V extends SplashView> extends BasePresenter<V>{
      */
     public SplashPresenter() {
         super();
-        mProductUpdateObservable = API.updateProductList();
+        mProductUpdateObservable = ProductLoader.updateProductList();
     }
 
     /**

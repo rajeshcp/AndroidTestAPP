@@ -81,6 +81,10 @@ public class ProductVO implements Parcelable, IDBModel{
         title = cursor.getString(cursor.getColumnIndex(ProductDBHrlper.TITLE));
         description = cursor.getString(cursor.getColumnIndex(ProductDBHrlper.DESCRIPTION));
         image = cursor.getString(cursor.getColumnIndex(ProductDBHrlper.IMAGE));
+
+        title = title.substring(0, 1).toUpperCase() + title.substring(1);
+        description = description.substring(0, 1).toUpperCase() +
+                description.substring(1);
     }
 
     public String getDescription() {

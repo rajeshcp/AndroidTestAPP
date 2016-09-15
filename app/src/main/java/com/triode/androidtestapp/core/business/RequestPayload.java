@@ -20,7 +20,7 @@ public class RequestPayload {
     public static final String REQUEST_PARAMS = "params";
     public static final String FORM_DATA = "form_data";
     /**
-     * Holds the API end point
+     * Holds the ProductLoader end point
      */
     private final String mAPIEndPoint;
     /**
@@ -63,7 +63,7 @@ public class RequestPayload {
     /**
      * getter function for mAPIEndPoint
      *
-     * @return the API set
+     * @return the ProductLoader set
      */
     public String getmAPIEndPoint() {
         return mAPIEndPoint;

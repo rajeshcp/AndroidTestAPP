@@ -126,6 +126,8 @@ public class SplashFragment<V extends SplashView, P extends SplashPresenter<V>> 
         }
         final FragmentTransaction transaction = new FragmentTransaction();
         transaction.isRoot = true;
+        transaction.mInAnimation  =  android.R.anim.slide_in_left;
+        transaction.mOutAnimation = android.R.anim.fade_out;
         transaction.mFrameId = R.id.container_view;
         transaction.mFragmentClass = ProductListFragment.class;
         getAtomicActivity().getmFragmentManager().push(transaction);

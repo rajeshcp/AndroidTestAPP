@@ -43,7 +43,7 @@ public class ProductDBHrlper implements ICoreObject<ProductVO> {
      */
     @Override
     public void deleteAll() throws Exception {
-        if(!AppLocalStore.getString(API.PRODUCT_END_POINT, "x").equals("x")) {
+        if(!AppLocalStore.getString(ProductLoader.PRODUCT_END_POINT, "x").equals("x")) {
             final SQLiteDatabase db = APPNucleus.getDbHelper().getWritableDatabase();
             final String sql = "delete from " + NAME;
             db.execSQL(sql);

@@ -7,17 +7,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.triode.androidtestapp.R;
 import com.triode.androidtestapp.core.mvp.ViewState;
 import com.triode.androidtestapp.core.mvp.ViewStateView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by triode on 14/9/16.
  */
 public class ProductListView extends ViewStateView<ViewState> {
 
-    RecyclerView mView;
+    @BindView(R.id.product_list)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
+    private View view;
+
+    Unbinder unbinder;
 
     /**
      * Return the enclosing view
@@ -26,7 +39,7 @@ public class ProductListView extends ViewStateView<ViewState> {
      */
     @Override
     public View getView() {
-        return mView;
+        return view;
     }
 
     /**
@@ -37,18 +50,19 @@ public class ProductListView extends ViewStateView<ViewState> {
      */
     @Override
     public void init(LayoutInflater inflater, ViewGroup parent) {
-        mView = (RecyclerView)inflater.inflate(R.layout.products_list_layout, parent, false);
+        view = inflater.inflate(R.layout.products_list_layout, parent, false);
+        unbinder = ButterKnife.bind(this, view);
         RecyclerView.LayoutManager llm;
         if(inflater.getContext().getResources().
                 getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            llm = new LinearLayoutManager(mView.getContext());
+            llm = new LinearLayoutManager(recyclerView.getContext());
         }else {
-            llm = new GridLayoutManager(mView.getContext(), 2);
+            llm = new GridLayoutManager(recyclerView.getContext(), 2);
         }
         llm.setAutoMeasureEnabled(true);
-        mView.setLayoutManager(llm);
-        mView.setNestedScrollingEnabled(false);
-        mView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
     }
 
     /**
@@ -66,7 +80,9 @@ public class ProductListView extends ViewStateView<ViewState> {
      */
     @Override
     public void onDestroy() {
-        mView = null;
+        unbinder.unbind();
+        unbinder = null;
+        recyclerView = null;
     }
 
     ViewState viewState;
@@ -99,5 +115,13 @@ public class ProductListView extends ViewStateView<ViewState> {
     @Override
     public ViewState saveViewState() {
         return viewState;
+    }
+
+    public void showProgress(){
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgress(){
+        progressBar.setVisibility(View.GONE);
     }
 }
